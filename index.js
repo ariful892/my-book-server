@@ -41,11 +41,11 @@ async function run() {
 
         app.put('/post/:id', async (req, res) => {
             const id = req.params.id;
-            const likes = req.body;
+            const updatedPost = req.body;
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updateDoc = {
-                $set: { likes: likes },
+                $set: { likes: updatedPost.likes },
             };
             const result = await postCollection.updateOne(filter, updateDoc, options);
             return res.send(result);
